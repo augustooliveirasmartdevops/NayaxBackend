@@ -21,26 +21,25 @@ namespace Nayax.Dex.Api.Controllers
         }
 
         [HttpPost("uploadDexFile")]
-        public async Task<IActionResult> UploadDexFileAsync([FromForm] FormFileCollection files)
+        public async Task<IActionResult> UploadDexFileAsync(IFormFile file)
         {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest(new { Message = "No file was sent." });
+            }
+
             try
             {
-                if (files == null || files.Count == 0)
-                {
-                    return BadRequest(new { Message = "No files were sent." });
-                }
-
-                await _dexApplication.UploadDexFileAsync();
-
-                return Ok(new { Message = "Files uploaded successfully" });
+                using var reader = new StreamReader(file.OpenReadStream());
+                var dexText = await reader.ReadToEndAsync();
+                await _dexApplication.UploadDexFileAsync(dexText);
+                return Ok(new { Message = "File processed successfully" });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //_logger.LogError(ex, "Error authenticating user {UserName}", request.UserName);
-                return StatusCode(StatusCodes.Status500InternalServerError, new
-                {
-                    Message = "An unexpected error occurred. Please try again."
-                });
+                _logger.LogError(ex, "Error processing DEX file");
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new { Message = "An unexpected error occurred. Please try again." });
             }
         }
     }

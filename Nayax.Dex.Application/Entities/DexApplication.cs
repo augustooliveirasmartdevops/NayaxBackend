@@ -12,15 +12,9 @@ namespace Nayax.Dex.Application.Entities
             _dexRepository = dexRepository;
         }
 
-        public async Task<bool> UploadDexFileAsync()
+        public async Task UploadDexFileAsync(string dexText)
         {
-            var dexDomain = await _dexRepository.UploadDexFileAsync();
-            if (dexDomain is null)
-            {
-                return false;
-            }
-
-            return true;
+            await _dexRepository.UploadDexFileAsync(dexText);
         }
     }
 }

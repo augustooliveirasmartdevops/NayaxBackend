@@ -2,6 +2,6 @@
 {
     public interface IDexApplication
     {
-        Task<bool> UploadDexFileAsync();
+        Task UploadDexFileAsync(string dexText);
     }
 }

@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Nayax.Dex.Repository\Nayax.Dex.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

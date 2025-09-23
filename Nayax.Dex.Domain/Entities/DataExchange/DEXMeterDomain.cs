@@ -2,8 +2,7 @@
 {
     public class DEXMeterDomain
     {
-        public int ID { get; private set; }
-
+        public int Id { get; set; }
         public required string MachineId { get; set; }
 
         public DateTime DEXDateTime { get; private set; }
@@ -12,16 +11,15 @@
 
         public decimal ValueOfPaidVends { get; private set; }
 
-        //protected DEXMeterDomain() { }
+        protected DEXMeterDomain() { }
 
-        //public DEXMeterDomain(int id, string machineId, DateTime dexDateTime, string machineSerialNumber, decimal valueOfPaidVends)
-        //{
-        //    ID = id;
-        //    MachineId = machineId;
-        //    DEXDateTime = dexDateTime;
-        //    MachineSerialNumber = machineSerialNumber;
-        //    ValueOfPaidVends = valueOfPaidVends;
-        //}
+        public DEXMeterDomain(string machineId, DateTime dexDateTime, string machineSerialNumber, decimal valueOfPaidVends)
+        {
+            MachineId = machineId;
+            DEXDateTime = dexDateTime;
+            MachineSerialNumber = machineSerialNumber;
+            ValueOfPaidVends = valueOfPaidVends;
+        }
     }
 
 

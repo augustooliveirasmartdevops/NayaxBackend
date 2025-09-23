@@ -3,17 +3,16 @@
     public class DEXLaneMeterDomain
     {
         public int Id { get; set; }
-        public Guid ProductIdentifier { get; private set; }
+        public Guid ProductIdentifier { get; set; }
 
-        public decimal Price { get; private set; }
+        public decimal Price { get; set; }
 
-        public int NumberOfVends { get; private set; }
+        public int NumberOfVends { get; set; }
 
-        public decimal ValueOfPaidSales { get; private set; }
+        public decimal ValueOfPaidSales { get; set; }
 
-        public DEXLaneMeterDomain(int id, Guid productIdentifier, decimal price, int numberOfVends, decimal valueOfPaidSales)
+        public DEXLaneMeterDomain(Guid productIdentifier, decimal price, int numberOfVends, decimal valueOfPaidSales)
         {
-            Id = id;
             ProductIdentifier = productIdentifier;
             Price = price;
             NumberOfVends = numberOfVends;

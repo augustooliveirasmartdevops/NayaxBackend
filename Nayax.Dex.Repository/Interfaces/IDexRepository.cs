@@ -1,9 +1,7 @@
-﻿using Nayax.Dex.Domain.Entities.DataExchange;
-
-namespace Nayax.Dex.Repository.Interfaces
+﻿namespace Nayax.Dex.Repository.Interfaces
 {
     public interface IDexRepository
     {
-        Task<DEXMeterDomain> UploadDexFileAsync();
+        Task<bool> UploadDexFileAsync(string dexText);
     }
 }

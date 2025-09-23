@@ -21,7 +21,7 @@ namespace Nayax.Dex.Repository.Configuration
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DEXMeterDomain>()
-                .HasKey(b => b.ID);
+                .HasKey(b => b.Id);
 
             modelBuilder.Entity<DEXLaneMeterDomain>()
                .HasKey(b => b.Id);
