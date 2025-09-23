@@ -21,12 +21,18 @@ namespace Nayax.Dex.Api.Controllers
         }
 
         [HttpPost("uploadDexFile")]
-        public async Task<IActionResult> UploadDexFileAsync()
+        public async Task<IActionResult> UploadDexFileAsync([FromForm] FormFileCollection files)
         {
             try
             {
-                var result = await _dexApplication.UploadDexFileAsync();
-                return Ok(await Task.FromResult(new { Message = "Authorized access" }));
+                if (files == null || files.Count == 0)
+                {
+                    return BadRequest(new { Message = "No files were sent." });
+                }
+
+                await _dexApplication.UploadDexFileAsync();
+
+                return Ok(new { Message = "Files uploaded successfully" });
             }
             catch (Exception)
             {
