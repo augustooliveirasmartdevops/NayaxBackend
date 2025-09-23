@@ -5,8 +5,6 @@ namespace Nayax.Dex.Repository.Entities
 {
     public class BaseRepository : IDisposable
     {
-        #region Dispose config
-
         private bool disposed = false;
         private readonly SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
 
@@ -34,6 +32,5 @@ namespace Nayax.Dex.Repository.Entities
             Dispose(false);
         }
 
-        #endregion
     }
 }

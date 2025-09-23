@@ -11,6 +11,7 @@ namespace Nayax.Dex.Application.IoC
         public static IServiceCollection AddApplicationDependencyInjection(this IServiceCollection services)
         {
             services.AddTransient<IAuthApplication, AuthApplication>();
+            services.AddTransient<IDexApplication, DexApplication>();
             services.AddTransient<IPasswordHasher<UserDomain>, PasswordHasher<UserDomain>>();
             return services;
         }

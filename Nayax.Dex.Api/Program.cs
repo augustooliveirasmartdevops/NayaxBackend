@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
+    // Get allowed hosts from appsetting file
     string allowedHosts = builder.Configuration.GetSection(key: "CorsSettings:AllowedHosts").Value ?? string.Empty;
 
     options.AddDefaultPolicy(policy =>
@@ -29,8 +30,33 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1",
         Description = "An API for Full-Stack Technical Project"
     });
+
+    // Define the Basic Authentication scheme
+    options.AddSecurityDefinition("basic", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "basic",
+        Description = "Enter your username and password."
+    });
+
+    // Require the scheme for all operations by default
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id   = "basic"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
 
+// Add Basic Authentication
 builder.Services.AddAuthentication("Basic")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Basic", null);
 
@@ -45,6 +71,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

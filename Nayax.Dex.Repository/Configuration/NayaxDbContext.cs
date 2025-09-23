@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Nayax.Dex.Domain.Entities.User;
+using Nayax.Dex.Domain.Entities.DataExchange;
 
 namespace Nayax.Dex.Repository.Configuration
 {
@@ -18,7 +18,17 @@ namespace Nayax.Dex.Repository.Configuration
             optionsBuilder.UseSqlServer(_sqlConnection);
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DEXMeterDomain>()
+                .HasKey(b => b.ID);
 
-        public required DbSet<UserDomain> User { get; set; }
+            modelBuilder.Entity<DEXLaneMeterDomain>()
+               .HasKey(b => b.Id);
+        }
+
+
+        public required DbSet<DEXMeterDomain> DEXMeter { get; set; }
+        public required DbSet<DEXLaneMeterDomain> DEXLaneMeter { get; set; }
     }
 }
