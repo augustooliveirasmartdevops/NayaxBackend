@@ -40,7 +40,7 @@ namespace Nayax.Dex.Api.Controllers
             {
                 _logger.LogError(ex, "Error processing DEX file");
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new { Message = "An unexpected error occurred. Please try again." });
+                    new { ex.Message });
             }
         }
     }

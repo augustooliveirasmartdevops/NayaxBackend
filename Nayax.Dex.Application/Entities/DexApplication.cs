@@ -15,6 +15,13 @@ namespace Nayax.Dex.Application.Entities
             _dexRepository = dexRepository;
         }
 
+        /// <summary>
+        /// Uploads a DEX file.
+        /// </summary>
+        /// <remarks>
+        /// I am aware that the data saved to the database might be inconsistent, as there was not enough time to fully comprehend all the documentation.
+        /// </remarks>
+        /// <param name="dexText">The DEX file content to be processed.</param>
         public async Task UploadDexFileAsync(string dexText)
         {
             await _dexRepository.BeginTransactionAsync();
