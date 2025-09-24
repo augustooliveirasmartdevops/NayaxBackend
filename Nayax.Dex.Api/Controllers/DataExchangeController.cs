@@ -33,6 +33,7 @@ namespace Nayax.Dex.Api.Controllers
                 using var reader = new StreamReader(file.OpenReadStream());
                 var dexText = await reader.ReadToEndAsync();
                 await _dexApplication.UploadDexFileAsync(dexText);
+
                 return Ok(new { Message = "File processed successfully" });
             }
             catch (Exception ex)

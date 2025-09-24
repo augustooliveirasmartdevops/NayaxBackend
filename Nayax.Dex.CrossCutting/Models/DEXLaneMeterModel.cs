@@ -1,8 +1,8 @@
-﻿namespace Nayax.Dex.Domain.Entities.DataExchange
+﻿namespace Nayax.Dex.CrossCutting.Models
 {
-    public class DEXLaneMeterDomain
+    public class DEXLaneMeterModel
     {
-        public int Id { get; set; }
+        public int DEXMeterId { get; set; }
 
         public Guid ProductIdentifier { get; set; }
 
@@ -12,8 +12,9 @@
 
         public decimal ValueOfPaidSales { get; set; }
 
-        public DEXLaneMeterDomain(Guid productIdentifier, decimal price, int numberOfVends, decimal valueOfPaidSales)
+        public DEXLaneMeterModel(int dexMeterId, Guid productIdentifier, decimal price, int numberOfVends, decimal valueOfPaidSales)
         {
+            DEXMeterId = dexMeterId;
             ProductIdentifier = productIdentifier;
             Price = price;
             NumberOfVends = numberOfVends;

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Nayax.Dex.CrossCutting\Nayax.Dex.CrossCutting.csproj" />
     <ProjectReference Include="..\Nayax.Dex.Repository\Nayax.Dex.Repository.csproj" />
   </ItemGroup>
 

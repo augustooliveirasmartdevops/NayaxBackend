@@ -5,11 +5,11 @@
         public int Id { get; set; }
         public required string MachineId { get; set; }
 
-        public DateTime DEXDateTime { get; private set; }
+        public DateTime DEXDateTime { get; set; }
 
         public required string MachineSerialNumber { get; set; }
 
-        public decimal ValueOfPaidVends { get; private set; }
+        public decimal ValueOfPaidVends { get; set; }
 
         protected DEXMeterDomain() { }
 
