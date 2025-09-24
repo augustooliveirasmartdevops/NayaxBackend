@@ -21,7 +21,17 @@ namespace Nayax.Dex.Application.Entities
 
             try
             {
-                var machineId = Regex.Match(dexText, @"ID1\*([^\*]+)").Groups[1].Value;
+                var id1Match = Regex.Match(dexText, @"ID1\*([^\r\n]+)");
+                string machineId = string.Empty;
+                if (id1Match.Success)
+                {
+                    var parts = id1Match.Groups[1].Value.Split('*');
+                    if (parts.Length >= 6)
+                    {
+                        machineId = parts[5];
+                    }
+                }
+
                 var serialMatch = Regex.Match(dexText, @"CB1\*([^*]+)");
                 var machineSerial = serialMatch.Success ? serialMatch.Groups[1].Value.Split('*')[0] : string.Empty;
 
@@ -52,17 +62,22 @@ namespace Nayax.Dex.Application.Entities
                 {
                     string lane = m.Groups[1].Value;
                     decimal price = decimal.Parse(m.Groups[2].Value) / 100m;
-                    var vendMatch = Regex.Match(dexText, $@"PA1\*{lane}\*[0-9]+\s*PA2\*(\d+)\*([0-9]+)", RegexOptions.Singleline);
 
                     int numberOfVends = 0;
                     decimal valueOfPaidSales = 0m;
+                    var vendMatch = Regex.Match(
+                        dexText,
+                        $@"PA2\*{lane}\*([0-9]+)\*([0-9]+)",
+                        RegexOptions.Multiline);
+
                     if (vendMatch.Success)
                     {
                         numberOfVends = int.Parse(vendMatch.Groups[1].Value);
                         valueOfPaidSales = decimal.Parse(vendMatch.Groups[2].Value) / 100m;
                     }
 
-                    dexLaneMeters.Add(new DEXLaneMeterModel(dexMeterId, Guid.NewGuid(), price, numberOfVends, valueOfPaidSales));
+                    string productId = m.Groups[1].Value;
+                    dexLaneMeters.Add(new DEXLaneMeterModel(dexMeterId, int.Parse(productId), price, numberOfVends, valueOfPaidSales));
                 }
 
                 await _dexRepository.SaveDEXLaneMetersAsync(dexLaneMeters);

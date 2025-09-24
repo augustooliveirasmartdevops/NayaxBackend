@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public Guid ProductIdentifier { get; set; }
+        public int ProductIdentifier { get; set; }
 
         public decimal Price { get; set; }
 
@@ -12,7 +12,7 @@
 
         public decimal ValueOfPaidSales { get; set; }
 
-        public DEXLaneMeterDomain(Guid productIdentifier, decimal price, int numberOfVends, decimal valueOfPaidSales)
+        public DEXLaneMeterDomain(int productIdentifier, decimal price, int numberOfVends, decimal valueOfPaidSales)
         {
             ProductIdentifier = productIdentifier;
             Price = price;
